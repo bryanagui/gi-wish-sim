@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Genshin Impact Wish Simulator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container text-center mt-4">
+        <span class="h4"><strong>Genshin Wish Simulator</strong></span>
+    </div>
+    <div class="container text-center mb-4">
+        <span><strong>Featured 5 Star: </strong>Yelan</span><br>
+        <span><strong>Featured 4 Star: </strong>Barbara, Noelle, Yanfei</span>
+    </div>
+    <div class="container text-center mt-4">
+        <button type="button" class="btn btn-primary mr-4 btn-pull-one">1x Wish</button>
+        <button type="button" class="btn btn-primary mr-4 btn-pull-ten">10x Wish</button>
+    </div>
+    <div class="container mt-4 list-of-pulls">
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+    <script>
+        $(document).ready(function () {
+            let pulls = [];
+            $(".btn-pull-one").click(function (e) {
+                e.preventDefault();
+                $(".list-of-pulls").html("");
+
+                pulls = onePull();
+                if (featuredFiveStar.includes(pulls) || nonFeaturedFiveStar.includes(pulls)) {
+                    $(".list-of-pulls").append("<p class='text-center text-warning'>1. " + v + " (5 Star)</p>");
+                }
+                else if (featuredFourStars.includes(pulls) || nonFeaturedFourStars.includes(pulls)) {
+                    $(".list-of-pulls").append("<p class='text-center' style='color:blueviolet;'>1. " + pulls + " (4 Star)</p>");
+                }
+                else {
+                    $(".list-of-pulls").append("<p class='text-center text-info'>1. " + pulls + " (3 Star)</p>");
+                }
+            });
+
+            $(".btn-pull-ten").click(function (e) {
+                e.preventDefault();
+                $(".list-of-pulls").html("");
+
+                pulls = tenPull();
+                $.each(pulls, function (i, v) {
+                    if (featuredFiveStar.includes(v) || nonFeaturedFiveStar.includes(v)) {
+                        $(".list-of-pulls").append("<p class='text-center text-warning'>" + (i + 1) + ". " + v + " (5 Star)</p>");
+                    }
+                    else if (featuredFourStars.includes(v) || nonFeaturedFourStars.includes(v)) {
+                        $(".list-of-pulls").append("<p class='text-center' style='color:blueviolet;'>" + (i + 1) + ". " + v + " (4 Star)</p>");
+                    }
+                    else {
+                        $(".list-of-pulls").append("<p class='text-center text-info'>" + (i + 1) + ". " + v + " (3 Star)</p>");
+                    }
+                    
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
